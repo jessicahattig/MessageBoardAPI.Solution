@@ -19,7 +19,7 @@ namespace MessageBoardApi.Controllers
 
         //GET api/messages???boards???messageboards??
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MessageBoard>>> Get(string messageText, string boardTitle, string userName, DateTime? date)
+        public async Task<ActionResult<IEnumerable<MessageBoard>>> Get([FromQuery] string messageText, string boardTitle, string userName, DateTime? date)
         {
             IQueryable<MessageBoard> query = _db.MessageBoards.AsQueryable();
 
