@@ -1,32 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MessageBoardApi.Models;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
-namespace CretaceousApi.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+namespace MessageBoardApi.Controllers;
 {
-    private static readonly string[] Summaries = new[]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MessageBoardController : ControllerBase
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        private readonly MessageBoardContext _db;
 
-    private readonly ILogger<WeatherForecastController> _logger;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
-    {
-        _logger = logger;
-    }
-
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
-    {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        public MessageBoardController(MessageBoardContext db)
         {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+            _db = db;
+        }
+
+        //GET api/messages???boards???messageboards??
+        [HttpGet]
+        public async Task<List<Message>> Get(string messagetext, string username, DateTime datetime)
+        {
+            
+        }
+    
     }
 }
+
