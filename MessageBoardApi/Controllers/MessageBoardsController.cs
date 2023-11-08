@@ -24,7 +24,7 @@ namespace MessageBoardApi.Controllers
 
             if(boardTitle != null)
             {
-                query = query.Where(e => e.Board.BoardTitle == boardTitle);
+                query = query.Where(e => e.Board.BoardTitle == boardTitle); //1 1 1 -> Message {MessageText} Board {}
             }
             if(messageText != null)
             {
