@@ -8,15 +8,14 @@ namespace MessageBoardApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MessageBoardController : ControllerBase
+    public class MessageBoardsController : ControllerBase
     {
         private readonly MessageBoardApiContext _db;
 
-        public MessageBoardController(MessageBoardApiContext db)
+        public MessageBoardsController(MessageBoardApiContext db)
         {
             _db = db;
         }
-
         //GET api/messages???boards???messageboards??
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MessageBoard>>> Get([FromQuery] string messageText, string boardTitle, string userName, DateTime? date)
