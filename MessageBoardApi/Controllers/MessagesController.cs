@@ -10,6 +10,6 @@ namespace MessageBoardApi.Controllers
   [ApiController]
   public class MessagesController : ControllerBase
   {
-
+    
   }
 }

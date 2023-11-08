@@ -1,4 +1,3 @@
-#nullable enable
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MessageBoardApi.Models;
@@ -19,27 +18,34 @@ namespace MessageBoardApi.Controllers
       _db = db;
     }
 
+    #nullable enable
     //GET api/messageboard
     [HttpGet]
-    public async Task<List<Board>> Get(int boardid, string boardtitle)
+    public async Task<List<Board>> Get(string? boardtitle)
     {
       IQueryable<Board> query = _db.Boards.AsQueryable();
 
-      if (boardid != null)
-      {
-        query = query.Where(entry => entry.BoardId == boardid);
-      }
-
       if (boardtitle != null)
       {
-        query = query.Where(entry => entry.BoardTitle == boardtitle);
+        query = query.Where(entry => entry.BoardTitle == boardtitle)
+                    .Include(entry => entry.JoinEntities);
       }
-
       return await query.ToListAsync();
     }
+
       //Get: api/Boards
       [HttpGet("{boardid}")]
-      PublicKey async Task<ActionResult<Board>> GetBoard(int boardid)
+      public async Task<ActionResult<Board>> GetBoard(int boardid)
+      {
+        Board? board = await _db.Boards.FindAsync(boardid);
+        if(board==null)
+        {
+          return NotFound();
+        }
+
+        return board;
+      }
     
   }
+  #nullable disable
 }

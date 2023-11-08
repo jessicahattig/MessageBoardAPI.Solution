@@ -12,7 +12,6 @@ namespace MessageBoardApi.Models
     public MessageBoardApiContext(DbContextOptions options) : base(options) 
     {
     }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
       builder.Entity<Message>()
@@ -22,7 +21,7 @@ namespace MessageBoardApi.Models
 
         builder.Entity<Board>()
         .HasData(
-          new Board { BoardId = 1, BoardTitle = "DnD MeetUp" }
+          new Board { BoardId = 1, BoardTitle = "DnDMeetUp"}
         );
 
         builder.Entity<MessageBoard>()
